@@ -1,5 +1,6 @@
 package com.amaan.tictactoe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -22,10 +23,55 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+
+        // Game Modes
+
+        Button passAndPlay = findViewById(R.id.pass_and_play);
+        Button playWithBot = findViewById(R.id.play_with_bot);
+        Button playViaBluetooth = findViewById(R.id.play_via_bluetooth);
+
+        passAndPlay.setOnClickListener(v -> {
+            Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra("mode", "PASS");
+            startActivity(intent);
+        });
+
+        playWithBot.setOnClickListener(v -> {
+            Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra("mode", "BOT");
+            startActivity(intent);
+        });
+
+        playViaBluetooth.setOnClickListener(v -> {
+            Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra("mode", "BLUETOOTH");
+            startActivity(intent);
+        });
+
+
+        // History and Settings
+
+        Button history = findViewById(R.id.history);
+        Button settings = findViewById(R.id.settings);
+
+        history.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HistoryActivity.class);
+            startActivity(intent);
+        });
+
+        settings.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
+
+        // Quit Button
+
         Button quit = findViewById(R.id.quit);
 
         quit.setOnClickListener(v -> {
             finishAffinity();
         });
+
     }
 }
