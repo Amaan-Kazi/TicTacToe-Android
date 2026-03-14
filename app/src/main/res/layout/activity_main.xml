@@ -7,13 +7,126 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="64dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/pass_and_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#59ADDE"
+            android:text="Pass And Play"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
+
+        <Button
+            android:id="@+id/play_with_bot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#59ADDE"
+            android:text="Play With Bot"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
+
+        <Button
+            android:id="@+id/play_via_bluetooth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#59ADDE"
+            android:text="Play Via Bluetooth"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
+
+        <Button
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#3BBA43"
+            android:text="History"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
+
+        <Button
+            android:id="@+id/settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#3BBA43"
+            android:text="Settings"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
+
+        <Button
+            android:id="@+id/quit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#E6654E"
+            android:text="Quit"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:cornerRadius="5dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="monospace"
+        android:text="Tic"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/title2"
+        app:layout_constraintTop_toTopOf="@+id/title2" />
+
+    <TextView
+        android:id="@+id/title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="176dp"
+        android:fontFamily="monospace"
+        android:text="Tac"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="monospace"
+        android:text="Toe"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/title2"
+        app:layout_constraintTop_toTopOf="@+id/title2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
