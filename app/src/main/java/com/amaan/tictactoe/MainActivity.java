@@ -32,19 +32,19 @@ public class MainActivity extends AppCompatActivity {
 
         passAndPlay.setOnClickListener(v -> {
             Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra("mode", "PASS");
+            intent.putExtra("mode", "Pass And Play");
             startActivity(intent);
         });
 
         playWithBot.setOnClickListener(v -> {
             Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra("mode", "BOT");
+            intent.putExtra("mode", "Play With Bot");
             startActivity(intent);
         });
 
         playViaBluetooth.setOnClickListener(v -> {
             Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra("mode", "BLUETOOTH");
+            intent.putExtra("mode", "Play Via Bluetooth");
             startActivity(intent);
         });
 
