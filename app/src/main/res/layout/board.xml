@@ -14,19 +14,22 @@
         <Button
             android:id="@+id/button00"
             style="@style/BoardCell"
-            android:text="Button" />
+            android:text="X"
+            android:textColor="@color/red" />
 
         <Button
             android:id="@+id/button01"
             style="@style/BoardCell"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Button" />
+            android:text="O"
+            android:textColor="@color/blue" />
 
         <Button
             android:id="@+id/button02"
             style="@style/BoardCell"
-            android:text="Button" />
+            android:text="X"
+            android:textColor="@color/red" />
 
     </LinearLayout>
 
@@ -40,7 +43,8 @@
             style="@style/BoardCell"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:text="Button" />
+            android:text="O"
+            android:textColor="@color/blue" />
 
         <Button
             android:id="@+id/button11"
@@ -48,16 +52,15 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Button" />
+            android:layout_marginBottom="5dp" />
 
         <Button
             android:id="@+id/button12"
             style="@style/BoardCell"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:text="O"
+            android:textColor="@color/blue" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,18 +71,21 @@
         <Button
             android:id="@+id/button20"
             style="@style/BoardCell"
-            android:text="Button" />
+            android:text="X"
+            android:textColor="@color/red" />
 
         <Button
             android:id="@+id/button21"
             style="@style/BoardCell"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Button" />
+            android:text="O"
+            android:textColor="@color/blue" />
 
         <Button
             android:id="@+id/button22"
             style="@style/BoardCell"
-            android:text="Button" />
+            android:text="X"
+            android:textColor="@color/red" />
     </LinearLayout>
 </LinearLayout>
