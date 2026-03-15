@@ -96,9 +96,15 @@ public class GameActivity extends AppCompatActivity {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if      (game.board.grid[i][j] == Board.X) cells[i][j].setText("X");
-                else if (game.board.grid[i][j] == Board.O) cells[i][j].setText("O");
-                else                                       cells[i][j].setText("");
+                if (game.board.grid[i][j] == Board.X) {
+                    cells[i][j].setText("X");
+                    cells[i][j].setTextColor(getColor(R.color.red));
+                }
+                else if (game.board.grid[i][j] == Board.O) {
+                    cells[i][j].setText("O");
+                    cells[i][j].setTextColor(getColor(R.color.blue));
+                }
+                else cells[i][j].setText("");
             }
         }
     }
