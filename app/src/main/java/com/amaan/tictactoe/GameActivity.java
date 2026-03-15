@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -69,6 +70,25 @@ public class GameActivity extends AppCompatActivity {
         }
 
         updateUI();
+
+        ImageButton previous = findViewById(R.id.previous);
+        ImageButton next = findViewById(R.id.next);
+        ImageButton reset = findViewById(R.id.reset);
+
+        previous.setOnClickListener(v -> {
+            game.undo(1);
+            updateUI();
+        });
+
+        next.setOnClickListener(v -> {
+            game.redo(1);
+            updateUI();
+        });
+
+        reset.setOnClickListener(v -> {
+            game.reset();
+            updateUI();
+        });
     }
 
     private void updateUI() {
@@ -84,7 +104,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void handleClick(int i, int j) {
-        game.move(i, j);
+        boolean success = game.move(i, j);
+
+        if (gameMode.equals("Play With Bot") && success) game.botMove();
+
         updateUI();
     }
 }
