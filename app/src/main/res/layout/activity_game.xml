@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <include
+        android:id="@+id/player2_details"
         layout="@layout/player_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -121,6 +122,7 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/player1_details"
         layout="@layout/player_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

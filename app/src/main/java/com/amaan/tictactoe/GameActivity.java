@@ -1,7 +1,9 @@
 package com.amaan.tictactoe;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,6 +22,8 @@ public class GameActivity extends AppCompatActivity {
 
     private String gameMode;
     private TextView gameModeOutput;
+
+    ColorStateList defaultTintList;
 
     private Button[][] cells;
 
@@ -57,6 +61,10 @@ public class GameActivity extends AppCompatActivity {
         cells[2][0] = boardUI.findViewById(R.id.button20);
         cells[2][1] = boardUI.findViewById(R.id.button21);
         cells[2][2] = boardUI.findViewById(R.id.button22);
+
+        int defaultBackground = getThemeColor(android.R.attr.colorBackground);
+        int defaultText = getThemeColor(com.google.android.material.R.attr.colorOnBackground);
+        defaultTintList = ColorStateList.valueOf(defaultBackground);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -96,15 +104,28 @@ public class GameActivity extends AppCompatActivity {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
+                cells[i][j].setText("");
+                cells[i][j].setBackgroundTintList(defaultTintList);
+
                 if (game.board.grid[i][j] == Board.X) {
                     cells[i][j].setText("X");
                     cells[i][j].setTextColor(getColor(R.color.red));
+
+                    if (game.board.winnerCell[i][j]) {
+                        cells[i][j].setTextColor(getColor(R.color.white));
+                        cells[i][j].setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.red)));
+                    }
                 }
                 else if (game.board.grid[i][j] == Board.O) {
                     cells[i][j].setText("O");
                     cells[i][j].setTextColor(getColor(R.color.blue));
+
+                    if (game.board.winnerCell[i][j]) {
+                        cells[i][j].setTextColor(getColor(R.color.white));
+                        cells[i][j].setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.blue)));
+                    }
                 }
-                else cells[i][j].setText("");
+
             }
         }
     }
@@ -115,5 +136,11 @@ public class GameActivity extends AppCompatActivity {
         if (gameMode.equals("Play With Bot") && success) game.botMove();
 
         updateUI();
+    }
+
+    private int getThemeColor(int attr) {
+        TypedValue value = new TypedValue();
+        getTheme().resolveAttribute(attr, value, true);
+        return value.data;
     }
 }
