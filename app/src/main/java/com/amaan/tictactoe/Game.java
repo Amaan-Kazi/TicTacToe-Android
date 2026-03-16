@@ -84,7 +84,7 @@ public class Game {
     }
   }
 
-  public void botMove() {
+  public void botMove(int maxDepth) {
     boolean maximize = board.xTurn;
     nodes = 0;
     int[][] validMoves = board.validMoves();
@@ -104,12 +104,6 @@ public class Game {
         else                            scores[i][j] = "0";
       }
     }
-
-    int maxDepth;
-    if      (board.size == 3) maxDepth = 9;
-    else if (board.size == 4) maxDepth = 6;
-    else if (board.size == 5) maxDepth = 4;
-    else                      maxDepth = 2;
 
     for (int i = 0; i < board.size; i++) {
       for (int j = 0; j < board.size; j++) {

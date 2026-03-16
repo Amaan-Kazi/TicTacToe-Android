@@ -167,7 +167,7 @@ public class GameActivity extends AppCompatActivity {
     private void handleClick(int i, int j) {
         boolean success = game.move(i, j);
 
-        if (gameMode.equals("Play With Bot") && success) game.botMove();
+        if (gameMode.equals("Play With Bot") && success) game.botMove(9);
 
         updateUI();
     }

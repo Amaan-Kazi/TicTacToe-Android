@@ -150,7 +150,7 @@ public class Board {
 
 
   public boolean isDraw() {
-    if (!state.equals("ongoing") && state != "Draw") return false;
+    if (!state.equals("ongoing") && !state.equals("Draw")) return false;
 
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < size; j++) {
