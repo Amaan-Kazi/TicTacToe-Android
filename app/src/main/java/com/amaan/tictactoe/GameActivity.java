@@ -2,6 +2,7 @@ package com.amaan.tictactoe;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -31,6 +32,10 @@ public class GameActivity extends AppCompatActivity {
 
     private Button[][] cells;
 
+    String player1Name;
+    String player2Name;
+    int bot_difficulty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +49,38 @@ public class GameActivity extends AppCompatActivity {
             return insets;
         });
 
+        Intent intent = getIntent();
+        gameMode = intent.getStringExtra("mode");
+
 
         boardUI = findViewById(R.id.board);
         player1DetailsUI = findViewById(R.id.player1_details);
         player2DetailsUI = findViewById(R.id.player2_details);
 
+
+
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper .getWritableDatabase();
+
+        android.database.Cursor cursor =
+                db.rawQuery("SELECT player1_name, player2_name, bot_difficulty FROM settings LIMIT 1", null);
+
+        if (cursor.moveToFirst()) {
+            player1Name = cursor.getString(0);
+            player2Name = cursor.getString(1);
+            bot_difficulty = cursor.getInt(2);
+
+            if (gameMode.equals("Play With Bot")) {
+                player2Name = "Bot [D" + bot_difficulty + "]";
+            }
+        }
+
+        cursor.close();
+
+
+
         gameModeOutput = findViewById(R.id.mode);
 
-        Intent intent = getIntent();
-        gameMode = intent.getStringExtra("mode");
 
         cells = new Button[3][3];
 
@@ -120,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
 
         piece1.setText("X");
         score1.setText("0");
-        player_name1.setText("Player 1");
+        player_name1.setText(player1Name);
 
 
         TextView piece2 = player2DetailsUI.findViewById(R.id.piece);
@@ -134,7 +162,7 @@ public class GameActivity extends AppCompatActivity {
 
         piece2.setText("O");
         score2.setText("0");
-        player_name2.setText("Player 2");
+        player_name2.setText(player2Name);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
