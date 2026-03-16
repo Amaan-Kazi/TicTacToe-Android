@@ -19,10 +19,14 @@ public class GameActivity extends AppCompatActivity {
     private Game game = new Game(3);
 
     private View boardUI;
+    private View player1DetailsUI;
+    private View player2DetailsUI;
 
     private String gameMode;
     private TextView gameModeOutput;
 
+    int defaultBackground;
+    int defaultText;
     ColorStateList defaultTintList;
 
     private Button[][] cells;
@@ -42,6 +46,8 @@ public class GameActivity extends AppCompatActivity {
 
 
         boardUI = findViewById(R.id.board);
+        player1DetailsUI = findViewById(R.id.player1_details);
+        player2DetailsUI = findViewById(R.id.player2_details);
 
         gameModeOutput = findViewById(R.id.mode);
 
@@ -62,8 +68,8 @@ public class GameActivity extends AppCompatActivity {
         cells[2][1] = boardUI.findViewById(R.id.button21);
         cells[2][2] = boardUI.findViewById(R.id.button22);
 
-        int defaultBackground = getThemeColor(android.R.attr.colorBackground);
-        int defaultText = getThemeColor(com.google.android.material.R.attr.colorOnBackground);
+        defaultBackground = getThemeColor(android.R.attr.colorBackground);
+        defaultText = getThemeColor(com.google.android.material.R.attr.colorOnBackground);
         defaultTintList = ColorStateList.valueOf(defaultBackground);
 
         for (int i = 0; i < 3; i++) {
@@ -101,6 +107,34 @@ public class GameActivity extends AppCompatActivity {
 
     private void updateUI() {
         gameModeOutput.setText(gameMode);
+
+
+        TextView piece1 = player1DetailsUI.findViewById(R.id.piece);
+        TextView score1 = player1DetailsUI.findViewById(R.id.score);
+        TextView player_name1 = player1DetailsUI.findViewById(R.id.player_name);
+
+        player_name1.setBackgroundColor(game.board.xTurn ? getColor(R.color.red) : defaultBackground);
+        player_name1.setTextColor(game.board.xTurn ? getColor(R.color.white) : defaultText);
+        piece1.setBackgroundColor(getColor(R.color.red));
+        score1.setBackgroundColor(getColor(R.color.red));
+
+        piece1.setText("X");
+        score1.setText("0");
+        player_name1.setText("Player 1");
+
+
+        TextView piece2 = player2DetailsUI.findViewById(R.id.piece);
+        TextView score2 = player2DetailsUI.findViewById(R.id.score);
+        TextView player_name2 = player2DetailsUI.findViewById(R.id.player_name);
+
+        player_name2.setBackgroundColor(game.board.xTurn ? defaultBackground : getColor(R.color.blue));
+        player_name2.setTextColor(game.board.xTurn ? defaultText : getColor(R.color.white));
+        piece2.setBackgroundColor(getColor(R.color.blue));
+        score2.setBackgroundColor(getColor(R.color.blue));
+
+        piece2.setText("O");
+        score2.setText("0");
+        player_name2.setText("Player 2");
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
