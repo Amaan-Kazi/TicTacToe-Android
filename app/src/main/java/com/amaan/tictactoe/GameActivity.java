@@ -36,6 +36,14 @@ public class GameActivity extends AppCompatActivity {
     String player2Name;
     int bot_difficulty;
 
+
+    int player1_wins = 0;
+    int player2_wins = 0;
+    int round_number = 1;
+    int rounds_drawn = 0;
+    boolean scoredAlready = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,17 +126,18 @@ public class GameActivity extends AppCompatActivity {
         ImageButton reset = findViewById(R.id.reset);
 
         previous.setOnClickListener(v -> {
-            game.undo(1);
+            if (game.board.state.equals("ongoing")) game.undo(1);
             updateUI();
         });
 
         next.setOnClickListener(v -> {
-            game.redo(1);
+            if (game.board.state.equals("ongoing")) game.redo(1);
             updateUI();
         });
 
         reset.setOnClickListener(v -> {
             game.reset();
+            scoredAlready = false;
             updateUI();
         });
     }
@@ -147,7 +156,7 @@ public class GameActivity extends AppCompatActivity {
         score1.setBackgroundColor(getColor(R.color.red));
 
         piece1.setText("X");
-        score1.setText("0");
+        score1.setText("" + player1_wins);
         player_name1.setText(player1Name);
 
 
@@ -161,8 +170,14 @@ public class GameActivity extends AppCompatActivity {
         score2.setBackgroundColor(getColor(R.color.blue));
 
         piece2.setText("O");
-        score2.setText("0");
+        score2.setText("" + player2_wins);
         player_name2.setText(player2Name);
+
+        TextView roundOutput = findViewById(R.id.round);
+        roundOutput.setText("" + round_number);
+
+        TextView drawsOutput = findViewById(R.id.draws);
+        drawsOutput.setText("" + rounds_drawn);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -196,6 +211,17 @@ public class GameActivity extends AppCompatActivity {
         boolean success = game.move(i, j);
 
         if (gameMode.equals("Play With Bot") && success) game.botMove(9);
+
+        if (!scoredAlready && !game.board.state.equals("ongoing")) {
+            round_number += 1;
+
+            if      (game.board.state.equals("X wins")) player1_wins += 1;
+            else if (game.board.state.equals("O wins")) player2_wins += 1;
+            else if (game.board.state.equals("Draw"))   rounds_drawn += 1;
+
+            // save here
+            scoredAlready = true;
+        }
 
         updateUI();
     }
