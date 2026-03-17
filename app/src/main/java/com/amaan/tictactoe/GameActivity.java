@@ -261,7 +261,7 @@ public class GameActivity extends AppCompatActivity {
             values.put("draws", rounds_drawn);
             values.put("timestamp", startTime);
 
-            db.update("history", values, "id = ?", new String[]{String.valueOf(sessionId)});
+            db.update("history", values, "rowid=?", new String[]{String.valueOf(sessionId)});
 
             scoredAlready = true;
         }
