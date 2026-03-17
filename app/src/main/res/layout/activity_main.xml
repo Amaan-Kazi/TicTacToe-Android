@@ -47,7 +47,9 @@
             android:text="Play Via Bluetooth"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:cornerRadius="5dp" />
+            android:visibility="gone"
+            app:cornerRadius="5dp"
+            tools:visibility="gone" />
 
         <Button
             android:id="@+id/history"

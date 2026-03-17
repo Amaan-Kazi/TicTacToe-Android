@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button passAndPlay = findViewById(R.id.pass_and_play);
         Button playWithBot = findViewById(R.id.play_with_bot);
-        Button playViaBluetooth = findViewById(R.id.play_via_bluetooth);
+        // Button playViaBluetooth = findViewById(R.id.play_via_bluetooth);
 
         passAndPlay.setOnClickListener(v -> {
             Intent intent = new Intent(this, GameActivity.class);
@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        playViaBluetooth.setOnClickListener(v -> {
-            Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra("mode", "Play Via Bluetooth");
-            startActivity(intent);
-        });
+//        playViaBluetooth.setOnClickListener(v -> {
+//            Intent intent = new Intent(this, WaitingActivity.class);
+//            intent.putExtra("mode", "Play Via Bluetooth");
+//            startActivity(intent);
+//        });
 
 
         // History and Settings
