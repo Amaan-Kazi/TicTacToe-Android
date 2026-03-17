@@ -1,5 +1,6 @@
 package com.amaan.tictactoe;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,6 +19,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class GameActivity extends AppCompatActivity {
     private Game game = new Game(3);
+
+    long sessionId;
+    SQLiteDatabase db;
+
+    String sessionString = "";
+    String gameString = "";
+
+    long startTime = System.currentTimeMillis();
 
     private View boardUI;
     private View player1DetailsUI;
@@ -68,7 +77,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         DBHelper dbHelper = new DBHelper(this);
-        SQLiteDatabase db = dbHelper .getWritableDatabase();
+        db = dbHelper .getWritableDatabase();
 
         android.database.Cursor cursor =
                 db.rawQuery("SELECT player1_name, player2_name, bot_difficulty FROM settings LIMIT 1", null);
@@ -83,7 +92,26 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+        startTime = System.currentTimeMillis();
+
         cursor.close();
+
+
+        ContentValues values = new ContentValues();
+
+        values.put("games", "");
+
+        values.put("player1_name", player1Name);
+        values.put("player1_score", 0);
+
+        values.put("player2_name", player2Name);
+        values.put("player2_score", 0);
+
+        values.put("draws", 0);
+
+        values.put("timestamp", startTime);
+
+        sessionId = db.insert("history", null, values);
 
 
 
@@ -136,7 +164,10 @@ public class GameActivity extends AppCompatActivity {
         });
 
         reset.setOnClickListener(v -> {
+            if (!game.board.state.equals("ongoing")) round_number += 1;
+
             game.reset();
+
             scoredAlready = false;
             updateUI();
         });
@@ -210,16 +241,28 @@ public class GameActivity extends AppCompatActivity {
     private void handleClick(int i, int j) {
         boolean success = game.move(i, j);
 
-        if (gameMode.equals("Play With Bot") && success) game.botMove(9);
+        if (gameMode.equals("Play With Bot") && success) game.botMove(bot_difficulty);
 
         if (!scoredAlready && !game.board.state.equals("ongoing")) {
-            round_number += 1;
-
             if      (game.board.state.equals("X wins")) player1_wins += 1;
             else if (game.board.state.equals("O wins")) player2_wins += 1;
             else if (game.board.state.equals("Draw"))   rounds_drawn += 1;
 
+            if (!sessionString.isEmpty()) sessionString += ";";
+            sessionString += gameString;
+
             // save here
+            ContentValues values = new ContentValues();
+            values.put("games", sessionString);
+            values.put("player1_name", player1Name);
+            values.put("player1_score", player1_wins);
+            values.put("player2_name", player2Name);
+            values.put("player2_score", player2_wins);
+            values.put("draws", rounds_drawn);
+            values.put("timestamp", startTime);
+
+            db.update("history", values, "id = ?", new String[]{String.valueOf(sessionId)});
+
             scoredAlready = true;
         }
 

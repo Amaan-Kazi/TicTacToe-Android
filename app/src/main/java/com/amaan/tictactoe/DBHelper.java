@@ -34,7 +34,9 @@ public class DBHelper extends SQLiteOpenHelper {
         // HISTORY TABLE
         db.execSQL(
             "CREATE TABLE history (" +
-                "id INTEGER PRIMARY KEY, " +   // no autoincrement
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+
+                "games TEXT, " +
 
                 "player1_name TEXT, " +
                 "player1_score INTEGER, " +
